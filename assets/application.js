@@ -9,6 +9,14 @@ mobMenuCloseBtn.addEventListener('click', () =>
     mobMenu.classList.remove('mobile-menu-wrap_open')
 );
 
+// Current Year
+
+let yearDate = new Date().getFullYear();
+
+const yearInCopyright = document.querySelector('#year');
+
+yearInCopyright.innerText = yearDate;
+
 // Modal Window
 
 const featuredImg = document.querySelector('#featuredImg');
