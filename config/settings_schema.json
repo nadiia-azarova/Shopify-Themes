@@ -1,0 +1,21 @@
+[
+    {
+        "name": "Navigation",
+        "settings": [
+            {
+                "type": "checkbox",
+                "id": "show_breadcrumb_nav",
+                "label": "Show breadcrumb navigation",
+                "default": true
+            }
+        ]
+    },
+    {
+        "name": "theme_info",
+        "theme_name": "Loryart",
+        "theme_version": "1.0.0",
+        "theme_author": "Nadia Azarova",
+        "theme_documentation_url": "https://github.com/Shopify/themekit",
+        "theme_support_url": "https://github.com/Shopify/themekit/issues"
+    }
+]

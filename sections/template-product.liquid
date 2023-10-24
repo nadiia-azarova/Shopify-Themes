@@ -1,0 +1,160 @@
+{% assign current_var = product.selected_or_first_available_variant %}
+{% assign featured_img = current_var.featured_image |  default: product.featured_image %}
+<div class="container">
+    <div class="row">
+        <div class="col-6 col-xs-12">
+            <div class="featured-img">
+                 {% if product.featured_image %}
+                    <button id="zoomInBtn" class="featured-img__zoom-btn featured-img__zoom-btn_zoomin">
+                        {% render 'icon-zoomin' %}
+                    </button>
+                    <div id="modalImage" class="featured-img__img-wrap">
+                        <button id="zoomOutBtn" class="featured-img__zoom-btn featured-img__zoom-btn_zoomout">
+                            {% render 'icon-close' %}
+                        </button>
+                        {% comment %} <button id="nextImg" class="featured-img__arrow-btn featured-img__arrow-btn_lt">
+                            {% render 'icon-arrow-lt' %}
+                        </button>
+                        <button id="prevImg" class="featured-img__arrow-btn featured-img__arrow-btn_rt">
+                            {% render 'icon-arrow-rt' %}
+                        </button> {% endcomment %}
+                        <img 
+                            src="{{ featured_img | image_url: width: 604 }}" 
+                            alt="{{ product.featured_image.alt | escape }}" 
+                            id="featuredImg"
+                            class="featured-img__img"
+                        >
+                    </div>
+                {% else %}
+                {{ 'image' |  placeholder_svg_tag: 'products__img' }}
+                {% endif %}
+            </div>
+            <ul class="thumbs">
+                {% for image in product.images %}
+                    <li class="thumbs__item {% if image == product.featured_image %}thumbs__item_active{% endif %}">
+                        <a 
+                            href="{{ image.src | img_url: 'large' }}" 
+                            class="thumbs__link"
+                            alt="{{ image.alt | escape }}"
+                        >
+                            <img src="{{ image.src | img_url: 'compact' }}" alt="{{ image.alt | escape }}" class="thumbs__img">
+                        </a>
+                    </li> 
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        <div class="col-6 col-xs-12 prod-txt">
+            {% form 'product', product %}
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <div class="rating"></div>
+                <h1 class="heading heading_a">{{ product.title }}</h1>
+                <div class="subtitle">
+                    <div class="subtitle__available {% if current_var.available %}subtitle__available_available{% endif %}">
+                        {% if current_var.available %}
+                            {% render "icon-tick" %} In Stock
+                        {% else %}
+                            {% render 'icon-cross' %} Out of Stock
+                        {% endif %}
+                    </div>
+                    <div class="subtitle__sku">
+                        SKU: {{ current_var.sku }}
+                    </div>
+                </div>
+                <div class="price">
+                    <div class="price__sale">{{ current_var.price | money }}</div>
+                    <div class="price__reg">{{ current_var.compare_at_price | money }}</div>
+                </div>
+                <div class="main-btns">
+                    <div class="main-btns__qty qty">
+                        <button class="qty__btn qty__btn_minus">-</button>
+                        <input 
+                            type="number" 
+                            name="quantity" 
+                            id="quantity-{{ section.id }}" value="1" 
+                            min="1" 
+                            max="{{ current_var.inventory_quantity }}"
+                            class="qty__input"
+                        >
+                        <button class="qty__btn qty__btn_plus">+</button>
+                    </div>
+                    <button 
+                        type="submit" 
+                        name="add" 
+                        {% unless current_var.available %}
+                            disabled
+                        {% endunless %}
+                        class="main-btns__add-btn btn">
+                        {% if current_var.available %}
+                            {% render 'icon-cart' %}
+                            <span class="btn__txt">Add to cart</span>
+                        {% else %}
+                            Sold Out
+                        {% endif %}
+                    </button>
+                </div>
+                <div class="list-btns">
+                    <div class="list-btns__wish">
+                        <a href="#" class="list-btns__link link-btn" title="Add to wish list">
+                            {% render 'icon-heart' %}
+                            Add to Wishlist
+                        </a>
+                    </div>
+                    <div class="list-btns__compare">
+                        <a href="#" class="list-btns__link link-btn" title="Add to comparison">
+                            {% render 'icon-scales' %}
+                            Add to Comparison
+                        </a>
+                    </div>
+                </div>
+                <div class="prod-txt__item prod-txt__item_desc desc">
+                    {{ product.description }}
+                </div>
+                <div class="prod-info">
+                    <div class="prod-info__block info-block">
+                        {% render 'icon-phone' %}
+                        <span class="heading heading_c">Contact our manager:</span>
+                        <a href="#" class="link-btn">+380 98 765 43 21</a>
+                    </div>
+                    <div class="prod-info__block info-block">
+                        <h3 class="info-block__heading heading heading_c">{% render 'icon-car' %}Courier delivery around Kyiv</h3>
+                        <p class="info-block__txt">Orders are accepted everyday from 9 a.m. to 9 p.m. Orders taken after 9. a.m. are delivered the next day. You can order delivery at the exact time. </p>
+                        <hr class="info-block__hr">
+                        <h3 class="info-block__heading heading heading_c">{% render 'icon-shop' %}Pick up</h3>
+                        <p class="info-block__txt">You can pick up your order from our nearest store. <a href="#" class="link-btn">See addresses</a></p>
+                    </div>
+                    <div class="info__block info-block">
+                        <h3 class="info-block__heading heading heading_c">Payment options</h3>
+                        <p class="info-block__txt">Cash on delivery</p>
+                        <ul class="info-block__payment-methods payment-methods">
+                            <li class="payment-methods__item payment-methods__item_visa">
+                                {% render 'icon-visa' %}
+                            </li>
+                            <li class="payment-methods__item">
+                                {% render 'icon-mastercard' %}
+                            </li>
+                            <li class="payment-methods__item">
+                                {% render 'icon-paypal' %}
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            {% endform %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <section class="section">
+                <h2 class="heading heading_b heading_center">Friquently bought together</h2>
+                <ul class="prod-section__item products">
+                    {% render 'product-card' %}
+                    {% render 'product-card' %}
+                    {% render 'product-card' %}
+                    {% render 'product-card' %}
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>

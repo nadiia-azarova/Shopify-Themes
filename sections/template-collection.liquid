@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-9">
+            <ul class="products">
+            {% paginate collection.products by 12 %}
+                {% for product in collection.products %}
+                    {% render 'product-card', product: product %}
+                {% endfor %}
+                </ul>
+                {% render 'pagination', paginate: paginate %}
+            {% endpaginate %}
+        </div>
+    </div>
+</div>

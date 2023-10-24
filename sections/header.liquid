@@ -1,0 +1,157 @@
+{% assign topMenu = linklists[section.settings.topMenuList].links %}
+{% assign mainMenu = linklists[section.settings.mainMenuList].links %}
+
+{% if section.settings.showAnnouncement %}
+  <div class="message-bar">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p class="message">{{ section.settings.mText }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+<div class="top-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="top-nav">
+          <ul class="top-nav__top-menu top-menu">
+            {% for link in topMenu %}
+              <li class="top-menu__item">
+                <a href="{{ link.url }}" class="top-menu__link {% if link.active == true %} top-menu__link_active {% endif %}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          <div class="top-nav__contact contact">Lorem</div>
+          <div class="top-nav__city city">Ipsum</div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="main-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <div id="mobMenuOpen" class="main-bar__open-menu-btn open-menu-btn">
+            {% render 'icon-burger' %}
+          </div>
+          <div class="main-nav__logo logo">
+            {% render 'logo' %}
+          </div>
+          <ul class="main-nav__main-menu main-menu">
+            {% for link in mainMenu %}
+              <li class="main-menu__item">
+                <a href="{{ link.url }}" class="main-menu__link {% if link.active == true %} top-menu__link_active {% endif %}">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+          <div class="menu-icon menu-icon_search">
+            <a href="#" class="menu-icon__link">
+              {% render 'icon-search' %}
+            </a>
+          </div>
+          {% if shop.customer_accounts_enabled %}
+            <div class="menu-icon menu-icon_user">
+              <a href="#" class="menu-icon__link">
+                {% render 'icon-user' %}
+                <span class="menu-icon__txt">Jane Doe</span>
+              </a>
+            </div>
+            <div class="menu-icon menu-icon_heart">
+              <a href="#" class="menu-icon__link">
+                {% render 'icon-heart' %}
+                <span class="menu-icon__counter">0</span>
+              </a>
+            </div>
+          {% endif %}
+          <div class="menu-icon menu-icon_scales">
+            <a href="#" class="menu-icon__link">
+              {% render 'icon-scales' %}
+              <span class="menu-icon__counter">0</span>
+            </a>
+          </div>
+          <div class="menu-icon menu-icon_cart">
+            <a href="{{ routes.cart_url }}" class="menu-icon__link">
+              {% render 'icon-cart' %}
+              <span class="menu-icon__counter">{{ cart.item_count }}</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="mobMenu" class="mobile-menu-wrap">
+  <div class="mobile-menu-wrap__close-menu-btn close-menu-btn">
+    <div id="mobMenuClose" class="close-menu-btn__icon-wrap">
+      {% render 'icon-cross' %}
+    </div>
+  </div>
+  <ul class="main-mobile">
+    {% for link in mainMenu %}
+      <li class="main-mobile__item">
+        <a href="{{ link.url }}" class="main-mobile__link {% if link.active == true %} main-mobile__link_active {% endif %}">{{ link.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <ul class="top-mobile">
+    {% for link in topMenu %}
+      <li class="top-mobile__item">
+        <a href="{{ link.url }}" class="top-mobile__link {% if link.active == true %} top-mobile__link_active {% endif %}">{{ link.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="user-mobile">
+    {% if shop.customer_accounts_enabled %}
+      <div class="menu-icon">
+        <a href="#" class="menu-icon__link">
+          {% render 'icon-user' %}
+          <span class="menu-icon__txt">Jane Doe</span>
+        </a>
+      </div>
+      <div class="menu-icon">
+        <a href="#" class="menu-icon__link">
+          {% render 'icon-heart' %}
+          <span class="menu-icon__counter">0</span>
+        </a>
+      </div>
+    {% endif %}
+    <div class="menu-icon">
+      <a href="#" class="menu-icon__link">
+        {% render 'icon-scales' %}
+        <span class="menu-icon__counter">0</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "showAnnouncement",
+        "label": "Show Announcement"
+      }, {
+        "type": "text",
+        "id": "mText",
+        "label": "MessageTxt",
+        "default": "Your announcement goes here"
+      }, {
+        "type": "link_list",
+        "id": "mainMenuList",
+        "label": "Main Menu",
+        "default": "main-menu"
+      }, {
+        "type": "link_list",
+        "id": "topMenuList",
+        "label": "Top Menu"
+      }
+    ]
+  }
+{% endschema %}
