@@ -740,6 +740,9 @@ html {
   font-size: 20px;
   padding: 40px 0;
 }
+.heading_b:first-child {
+  padding-top: 0;
+}
 .heading_c, .product-item__title {
   font-size: 16px;
 }
@@ -1255,6 +1258,18 @@ html {
 }
 .features__heading {
   margin-bottom: 16px;
+}
+
+.bar-features {
+  box-sizing: border-box;
+  padding: 48px 0;
+  background-color: #f4f0ef;
+}
+.bar-features__heading {
+  margin-bottom: 8px;
+}
+.bar-features__txt {
+  padding: 8px 0;
 }
 
 .products {
