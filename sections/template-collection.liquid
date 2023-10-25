@@ -1,6 +1,59 @@
 <div class="container">
     <div class="row">
-        <div class="col-3"></div>
+        <div class="col-12">
+            <h1 class="heading heading_a heading_center">{{ collection.title }}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="filter">
+                <div class="filter__block fl-price">
+                    <h4 class="filter__heading heading heading_d">Price</h4>
+                </div>
+                <div class="filter__block fl-mono">
+                    <h4 class="heading heading_d"></h4>
+
+                </div>
+                <div class="filter__block fl-occasion">
+                    <h4 class="filter__heading heading heading_d">Occasion</h4>
+
+                </div>
+                <div class="filter__block fl-size">
+                    <h4 class="filter__heading heading heading_d">Size</h4>
+
+                </div>
+                <div class="filter__block">
+                    <h4 class="filter__heading heading heading_d">Flowers</h4>
+                    <ul class="filter-list">
+                        <li class="filter-list__item">
+                            <input type="checkbox" name="Alstroemeria" id="fl_1" class="filter-list__checkbox" tabindex="-1">
+                            {% render 'icon-checkbox-unchecked' %}
+                            <label for="fl_1" class="filter-list__label">Alstroemeria</label>
+                            <div class="filter-list__counter">22</div>
+                        </li>
+                        <li class="filter-list__item">
+                            <input type="checkbox" name="Carnation" id="fl_2" class="filter-list__checkbox" tabindex="-1">
+                            {% render 'icon-checkbox-unchecked' %}
+                            <label for="fl_2" class="filter-list__label">Carnation</label>
+                            <div class="filter-list__counter">13</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="filter__block">
+                    <h4 class="filter__heading heading heading_d">Color</h4>
+                    <ul class="filter-list">
+                        <li class="filter-list__item">
+                            <input type="checkbox" name="white" id="cl_1" class="filter-list__checkbox" tabindex="-1">
+                            {% render 'icon-checkbox-unchecked' %}
+                            <div class="filter-list__picker"></div>
+                            <label for="cl_1" class="filter-list__label">White</label>
+                            <div class="filter-list__counter"></div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="col-9">
             <ul class="products">
             {% paginate collection.products by 12 %}

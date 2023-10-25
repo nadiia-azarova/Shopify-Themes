@@ -1,14 +1,18 @@
+{% assign specialFeatures = section.blocks | where: 'type', 'feature' %}
+
+{% if specialFeatures != empty %}
 <div class="bar-features">
   <div class="container">
     <div class="row">
-      <div class="col-6">
-        <h2 class="bar-features__heading heading heading_c">Photo Approve</h2>
-        <p class="bar-features__txt">Before delivering the bouquet we can send you it’s photo so you could approve the composition or change it if needed.</p>
-      </div>
-      <div class="col-6">
-        <h2 class="bar-features__heading heading heading_c">Quality assurance</h2>
-        <p class="bar-features__txt">We work only with proven suppliers and we test our flowers for freshness to ensure the best quality of your products.</p>
+      <div class="col-12">
+        {% for item in specialFeatures %}
+          <div class="bar-features__item">
+            <h2 class="bar-features__heading heading heading_b">{{ item.settings.featureHead }}</h2>
+            <p class="bar-features__txt">{{ item.settings.featureTxt }}</p>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
 </div>
+{% endif %}
