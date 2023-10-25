@@ -1,24 +1,63 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <h1 class="heading heading_a heading_center">{{ collection.title }}</h1>
+            <h1 class="section__heading heading heading_a heading_center">{{ collection.title }}</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-3">
             <div class="filter">
-                <div class="filter__block fl-price">
+                <div class="filter__block">
                     <h4 class="filter__heading heading heading_d">Price</h4>
+                    <div class="range-slider">
+                        <div class="range-slider__values-wrap">
+                            <span class="range-slider__txt">$</span>
+                            <span class="range-slider__values range-slider__values_min"></span>
+                            <span class="range-slider__txt">&ndash;</span>
+                            <span class="range-slider__values range-slider__values_max"></span>
+                        </div>
+                        <input 
+                            value="1000" 
+                            min="1000" 
+                            max="50000" 
+                            step="500" 
+                            type="range"
+                            class="range-slider__range"
+                        >
+                        <input 
+                            value="50000" 
+                            min="1000" 
+                            max="50000" 
+                            step="500" 
+                            type="range"
+                            class="range-slider__range"
+                        >
+                    </div>
                 </div>
-                <div class="filter__block fl-mono">
+                <div class="filter__block">
                     <h4 class="heading heading_d"></h4>
-
+                    <ul class="filter-list">
+                        <li class="filter-list__item">
+                            <input 
+                                type="checkbox" 
+                                name="mono" 
+                                id="mono" 
+                                class="filter-list__checkbox" 
+                                tabindex="-1"
+                            >
+                            <label for="mono" class="filter-list__label">
+                                {% render 'icon-checkbox-unchecked' %}
+                                <h4 class="filter-list__txt heading heading_d">Mono Bouquet</h4>
+                                <div class="filter-list__counter">15</div>
+                            </label>
+                        </li>
+                    </ul>
                 </div>
-                <div class="filter__block fl-occasion">
+                <div class="filter__block">
                     <h4 class="filter__heading heading heading_d">Occasion</h4>
 
                 </div>
-                <div class="filter__block fl-size">
+                <div class="filter__block">
                     <h4 class="filter__heading heading heading_d">Size</h4>
 
                 </div>
@@ -27,15 +66,19 @@
                     <ul class="filter-list">
                         <li class="filter-list__item">
                             <input type="checkbox" name="Alstroemeria" id="fl_1" class="filter-list__checkbox" tabindex="-1">
-                            {% render 'icon-checkbox-unchecked' %}
-                            <label for="fl_1" class="filter-list__label">Alstroemeria</label>
-                            <div class="filter-list__counter">22</div>
+                            <label for="fl_1" class="filter-list__label">
+                                {% render 'icon-checkbox-unchecked' %}
+                                <span class="filter-list__txt">Alstroemeria</span>
+                                <span class="filter-list__counter">22</span>
+                            </label>
                         </li>
                         <li class="filter-list__item">
                             <input type="checkbox" name="Carnation" id="fl_2" class="filter-list__checkbox" tabindex="-1">
-                            {% render 'icon-checkbox-unchecked' %}
-                            <label for="fl_2" class="filter-list__label">Carnation</label>
-                            <div class="filter-list__counter">13</div>
+                            <label for="fl_2" class="filter-list__label">
+                                {% render 'icon-checkbox-unchecked' %}
+                                <span class="filter-list__txt">Carnation</span>
+                                <span class="filter-list__counter">13</span> 
+                            </label>
                         </li>
                     </ul>
                 </div>
@@ -44,12 +87,13 @@
                     <ul class="filter-list">
                         <li class="filter-list__item">
                             <input type="checkbox" name="white" id="cl_1" class="filter-list__checkbox" tabindex="-1">
-                            {% render 'icon-checkbox-unchecked' %}
-                            <div class="filter-list__picker"></div>
-                            <label for="cl_1" class="filter-list__label">White</label>
-                            <div class="filter-list__counter"></div>
+                            <label for="cl_1" class="filter-list__label">
+                                {% render 'icon-checkbox-unchecked' %}
+                                <span class="filter-list__picker"></span>
+                                <span class="filter-list__txt">White</span>
+                                <span class="filter-list__counter"></span>
+                            </label>
                         </li>
-                        
                     </ul>
                 </div>
             </div>

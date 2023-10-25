@@ -24,6 +24,12 @@
     <footer class="page__footer footer">
       {% section 'footer' %}
     </footer>
+    {% if template == 'collection' %}
+      {{ 'range-slider.js' | asset_url | script_tag }}
+    {% endif %}
+    {% if template == 'product' or template == 'cart' %}
+      {{ 'qty-btn.js' | asset_url | script_tag }}
+    {% endif %}
     {{ 'application.js' | asset_url | script_tag }}
   </body>
 </html>

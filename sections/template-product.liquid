@@ -85,7 +85,7 @@
                         {% unless current_var.available %}
                             disabled
                         {% endunless %}
-                        class="main-btns__add-btn btn">
+                        class="main-btns__add-btn btn btn_dark">
                         {% if current_var.available %}
                             {% render 'icon-cart' %}
                             <span class="btn__txt">Add to cart</span>
@@ -147,7 +147,7 @@
     <div class="row">
         <div class="col-12">
             <section class="section">
-                <h2 class="heading heading_b heading_center">Friquently bought together</h2>
+                <h2 class="section__heading heading heading_b heading_center">Friquently bought together</h2>
                 <ul class="prod-section__item products">
                     {% render 'product-card' %}
                     {% render 'product-card' %}
