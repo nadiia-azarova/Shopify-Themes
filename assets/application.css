@@ -738,7 +738,6 @@ html {
 }
 .heading_b {
   font-size: 20px;
-  padding: 40px 0;
 }
 .heading_b:first-child {
   padding-top: 0;
@@ -1263,7 +1262,7 @@ html {
   gap: 24px;
 }
 .bar-features__item {
-  flex: 1 1 auto;
+  flex: 1 1 248px;
 }
 .bar-features__heading {
   margin-bottom: 8px;
