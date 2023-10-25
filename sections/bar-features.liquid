@@ -5,14 +5,42 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        {% for item in specialFeatures %}
-          <div class="bar-features__item">
-            <h2 class="bar-features__heading heading heading_b">{{ item.settings.featureHead }}</h2>
-            <p class="bar-features__txt">{{ item.settings.featureTxt }}</p>
-          </div>
-        {% endfor %}
+        <div class="bar-features__wrap">
+          {% for item in specialFeatures %}
+            <div class="bar-features__item">
+              <h2 class="bar-features__heading heading heading_b">{{ item.settings.featureHead }}</h2>
+              <p class="bar-features__txt">{{ item.settings.featureTxt }}</p>
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
 </div>
 {% endif %}
+
+{% schema %}
+  {
+    "name": "Special Features",
+    "blocks": [
+      {
+        "type": "feature",
+        "name": "Special Feature",
+        "limit": 4,
+        "settings": [
+          {
+            "type": "text",
+            "id": "featureHead",
+            "label": "Heading",
+            "default": "Your Heading Goes Here"
+          }, {
+            "type": "textarea",
+            "id": "featureTxt",
+            "label": "Description",
+            "default": "Here goes the description of your special feature"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

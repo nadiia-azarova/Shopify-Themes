@@ -1255,6 +1255,16 @@ html {
   padding: 48px 0;
   background-color: #f4f0ef;
 }
+.bar-features__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+}
+.bar-features__item {
+  flex: 1 1 auto;
+}
 .bar-features__heading {
   margin-bottom: 8px;
 }
