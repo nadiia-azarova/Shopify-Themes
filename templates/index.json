@@ -1,0 +1,14 @@
+{
+    "sections": {
+        "hero_header": {
+            "type": "hero"
+        },
+        "featured_info": {
+            "type": "bar-features"
+        },
+        "featured_collection": {
+            "type": "featured-collection"
+        }
+    },
+    "order": ["hero_header", "featured_info", "featured_collection"]
+}

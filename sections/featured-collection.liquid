@@ -1,0 +1,67 @@
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section__heading heading heading_b heading_center">{{ section.settings.title }}</h2>
+                <div class="carousel">
+                    <div class="carousel__wrap">
+                        <ul class="products">
+                            {% for product in section.settings.featured_collection.products limit: section.settings.number_of_products %}
+                                {% render 'product-card' product: product %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% if section.settings.number_of_products > 4 %}
+                        <button class="carousel__btn carousel__btn_lt btn btn_light">
+                            {% render 'icon-arrow-lt' %}
+                        </button>
+                        <button class="carousel__btn carousel__btn_rt btn btn_light">
+                            {% render 'icon-arrow-rt' %}
+                        </button>
+                        <div class="carousel__dots">
+                            <ul class="dots">
+                                {% assign dot_number = section.settings.number_of_products %}
+                                {% for i in (1..dot_number) %}
+                                    <li class="dots__item"></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Featured Collection",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Collection Title",
+            "default": "Featured Collection"
+        },
+        {
+            "type": "collection",
+            "id": "featured_collection",
+            "label": "Collection"
+        },
+        {
+            "type": "range",
+            "id": "number_of_products",
+            "label": "Number of Products to Show",
+            "min": 4,
+            "max": 12,
+            "step": 1,
+            "default": 4
+        }
+    ],
+    "presets": [
+        {
+            "name": "Featured Collection"
+        }
+    ]
+}
+{% endschema %}
