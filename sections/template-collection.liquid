@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col-3">
-            <div class="filter">
+            <form class="filter">
                 {% for filter in collection.filters %}
                     <div class="filter__block">
                         <h4 class="heading heading_d">{{ filter.label }}</h4>
@@ -15,9 +15,13 @@
                                 <li class="filter-list__item">
                                     <input type="checkbox" name="Carnation" id="fl_2" class="filter-list__checkbox" tabindex="-1">
                                     <label for="fl_2" class="filter-list__label">
-                                        {% render 'icon-checkbox-unchecked' %}
+                                        {% if filter_value.active %}
+                                            {% render 'icon-checkbox-checked' %}
+                                        {% else %}
+                                            {% render 'icon-checkbox-unchecked' %}
+                                        {% endif %}
                                         <span class="filter-list__txt">{{ filter_value.label }}</span>
-                                        <span class="filter-list__counter">13</span> 
+                                        <span class="filter-list__counter">{{ filter_value.count }}</span> 
                                     </label>
                                 </li> 
                             {% endfor %}
@@ -113,7 +117,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-9">
             <ul class="products">
