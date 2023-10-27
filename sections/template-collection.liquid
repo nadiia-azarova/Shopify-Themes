@@ -6,117 +6,104 @@
     </div>
     <div class="row">
         <div class="col-3">
+            <div class="filter-btns">
+                <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear All</a>
+                
+            </div>
             <form class="filter">
+                <input type="submit" value="Apply">
                 {% for filter in collection.filters %}
-                    <div class="filter__block">
-                        <h4 class="heading heading_d">{{ filter.label }}</h4>
-                        <ul class="filter-list">
-                            {% for filter_value in filter.values %}
-                                <li class="filter-list__item">
-                                    <input type="checkbox" name="Carnation" id="fl_2" class="filter-list__checkbox" tabindex="-1">
-                                    <label for="fl_2" class="filter-list__label">
-                                        {% if filter_value.active %}
-                                            {% render 'icon-checkbox-checked' %}
-                                        {% else %}
-                                            {% render 'icon-checkbox-unchecked' %}
-                                        {% endif %}
-                                        <span class="filter-list__txt">{{ filter_value.label }}</span>
-                                        <span class="filter-list__counter">{{ filter_value.count }}</span> 
-                                    </label>
-                                </li> 
-                            {% endfor %}
-                        </ul>
-                    </div>
+                    {% unless filter.param_name == 'filter.v.availability' %}
+                        {% case filter.type %}
+                            {% when 'list' %}
+                                <div class="filter__block">
+                                    <h4 class="heading heading_d">{{ filter.label }}</h4>
+                                    <ul class="filter-list">
+                                    {% for filter_value in filter.values %}
+                                        <li class="filter-list__item">
+                                            <input 
+                                                type="checkbox" 
+                                                name="{{ filter.param_name }}" 
+                                                id="filter_{{ filter.param_name }}_{{ forloop.index }}" 
+                                                class="filter-list__checkbox" 
+                                                tabindex="-1"
+                                            >
+                                            <label 
+                                                for="filter_{{ filter.param_name }}_{{ forloop.index }}" 
+                                                class="filter-list__label"
+                                            >
+                                                {% if filter_value.active %}
+                                                    {% render 'icon-checkbox-checked' %}
+                                                {% else %}
+                                                    {% render 'icon-checkbox-unchecked' %}
+                                                {% endif %}
+                                                <span class="filter-list__txt">{{ filter_value.label }}</span>
+                                                <span class="filter-list__counter">{{ filter_value.count }}</span> 
+                                            </label>
+                                        </li> 
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            {% when 'boolean' %}
+                                <div class="filter__block">
+                                    <h4 class="heading heading_d"></h4>
+                                    <ul class="filter-list">
+                                        <li class="filter-list__item">
+                                            <input 
+                                                type="checkbox" 
+                                                name="mono" 
+                                                id="mono" 
+                                                class="filter-list__checkbox" 
+                                                tabindex="-1"
+                                            >
+                                            <label for="mono" class="filter-list__label">
+                                                {% if filter_value.active %}
+                                                    {% render 'icon-checkbox-checked' %}
+                                                {% else %}
+                                                    {% render 'icon-checkbox-unchecked' %}
+                                                {% endif %}
+                                                <h4 class="filter-list__txt heading heading_d">{{ filter_value.label }}</h4>
+                                                <div class="filter-list__counter">{{ filter_value.count }}</div>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            {% when 'price_range' %}
+                                <div class="filter__block">
+                                    <h4 class="filter__heading heading heading_d">{{ filter_value.label }}</h4>
+                                    <div class="range-slider">
+                                        <div class="range-slider__values-wrap">
+                                            <span class="range-slider__txt">{{ cart.currency.symbol }}</span>
+                                            <span class="range-slider__values range-slider__values_min"></span>
+                                            <span class="range-slider__txt">&ndash;</span>
+                                            <span class="range-slider__values range-slider__values_max"></span>
+                                        </div>
+                                        <input 
+                                            {% if filter.min_value.value %}
+                                                value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+                                            {% else %}
+                                                value="0"
+                                            {% endif %}
+                                            min="0" 
+                                            max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" 
+                                            step="10" 
+                                            type="range"
+                                            class="range-slider__range"
+                                        >
+                                        <input 
+                                            value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                            min="0" 
+                                            max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" 
+                                            step="10" 
+                                            type="range"
+                                            class="range-slider__range"
+                                        >
+                                    </div>
+                                </div>
+                        {% endcase %}
+                    {% endunless %}
                 {% endfor %}
-                <div class="filter__block">
-                    <h4 class="filter__heading heading heading_d">Price</h4>
-                    <div class="range-slider">
-                        <div class="range-slider__values-wrap">
-                            <span class="range-slider__txt">$</span>
-                            <span class="range-slider__values range-slider__values_min"></span>
-                            <span class="range-slider__txt">&ndash;</span>
-                            <span class="range-slider__values range-slider__values_max"></span>
-                        </div>
-                        <input 
-                            value="1000" 
-                            min="1000" 
-                            max="50000" 
-                            step="500" 
-                            type="range"
-                            class="range-slider__range"
-                        >
-                        <input 
-                            value="50000" 
-                            min="1000" 
-                            max="50000" 
-                            step="500" 
-                            type="range"
-                            class="range-slider__range"
-                        >
-                    </div>
-                </div>
-                <div class="filter__block">
-                    <h4 class="heading heading_d"></h4>
-                    <ul class="filter-list">
-                        <li class="filter-list__item">
-                            <input 
-                                type="checkbox" 
-                                name="mono" 
-                                id="mono" 
-                                class="filter-list__checkbox" 
-                                tabindex="-1"
-                            >
-                            <label for="mono" class="filter-list__label">
-                                {% render 'icon-checkbox-unchecked' %}
-                                <h4 class="filter-list__txt heading heading_d">Mono Bouquet</h4>
-                                <div class="filter-list__counter">15</div>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="filter__block">
-                    <h4 class="filter__heading heading heading_d">Occasion</h4>
-
-                </div>
-                <div class="filter__block">
-                    <h4 class="filter__heading heading heading_d">Size</h4>
-
-                </div>
-                <div class="filter__block">
-                    <h4 class="filter__heading heading heading_d">Flowers</h4>
-                    <ul class="filter-list">
-                        <li class="filter-list__item">
-                            <input type="checkbox" name="Alstroemeria" id="fl_1" class="filter-list__checkbox" tabindex="-1">
-                            <label for="fl_1" class="filter-list__label">
-                                {% render 'icon-checkbox-unchecked' %}
-                                <span class="filter-list__txt">Alstroemeria</span>
-                                <span class="filter-list__counter">22</span>
-                            </label>
-                        </li>
-                        <li class="filter-list__item">
-                            <input type="checkbox" name="Carnation" id="fl_2" class="filter-list__checkbox" tabindex="-1">
-                            <label for="fl_2" class="filter-list__label">
-                                {% render 'icon-checkbox-unchecked' %}
-                                <span class="filter-list__txt">Carnation</span>
-                                <span class="filter-list__counter">13</span> 
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="filter__block">
-                    <h4 class="filter__heading heading heading_d">Color</h4>
-                    <ul class="filter-list">
-                        <li class="filter-list__item">
-                            <input type="checkbox" name="white" id="cl_1" class="filter-list__checkbox" tabindex="-1">
-                            <label for="cl_1" class="filter-list__label">
-                                {% render 'icon-checkbox-unchecked' %}
-                                <span class="filter-list__picker"></span>
-                                <span class="filter-list__txt">White</span>
-                                <span class="filter-list__counter"></span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
+                <button></button>
             </form>
         </div>
         <div class="col-9">
