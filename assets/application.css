@@ -1472,13 +1472,19 @@ html {
   padding: 8px 24px;
   border: 1px solid #f4f0ef;
   border-radius: 16px;
-  overflow: hidden;
   font-size: 14px;
   line-height: 20px;
+  position: relative;
 }
 .filter__block {
   box-sizing: border-box;
   padding: 16px 0;
+}
+.filter__apply-btn {
+  position: absolute;
+  left: 96%;
+  z-index: 999;
+  white-space: nowrap;
 }
 
 .filter-list {

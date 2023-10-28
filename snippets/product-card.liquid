@@ -1,3 +1,5 @@
+{% assign bouquetSize = product.metafields.custom.size.value %}
+{% assign currentSize = 'M' %}
 <li class="products__item">
     <div class="products__btns">
         {% render 'icon-heart' %}
@@ -26,7 +28,7 @@
         <h3 class="info__heading heading heading_c">
             <a href="{{ product.url }}" class="heading__link">{{ product.title }}</a>
         </h3>
-        <div class="info__size">58cm (L)</div>
+        <div class="info__size">{{ product.metafields.custom.size.value }}()</div>
         <div class="info__price card-price">
             <div class="card-price__reg-price">{{ product.price | money }}</div>
             {% if product.compare_at_price %}

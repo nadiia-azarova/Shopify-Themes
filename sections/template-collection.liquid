@@ -8,10 +8,8 @@
         <div class="col-3">
             <div class="filter-btns">
                 <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear All</a>
-                
             </div>
             <form class="filter">
-                <input type="submit" value="Apply">
                 {% for filter in collection.filters %}
                     {% unless filter.param_name == 'filter.v.availability' %}
                         {% case filter.type %}
@@ -23,7 +21,8 @@
                                         <li class="filter-list__item">
                                             <input 
                                                 type="checkbox" 
-                                                name="{{ filter.param_name }}" 
+                                                name="{{ filter.param_name }}"
+                                                value="{{ filter_value.value }}"
                                                 id="filter_{{ filter.param_name }}_{{ forloop.index }}" 
                                                 class="filter-list__checkbox" 
                                                 tabindex="-1"
@@ -52,6 +51,7 @@
                                             <input 
                                                 type="checkbox" 
                                                 name="mono" 
+                                                value="{{ filter_value.value }}"
                                                 id="mono" 
                                                 class="filter-list__checkbox" 
                                                 tabindex="-1"
@@ -78,12 +78,12 @@
                                             <span class="range-slider__txt">&ndash;</span>
                                             <span class="range-slider__values range-slider__values_max"></span>
                                         </div>
-                                        <input 
-                                            {% if filter.min_value.value %}
+                                        <input
+                                            name="{{ filter.min_value.param_name }}"
+                                            {% if filter.min_value.value -%}
                                                 value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
-                                            {% else %}
-                                                value="0"
-                                            {% endif %}
+                                            {%- endif %}
+                                            placeholder="0"
                                             min="0" 
                                             max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" 
                                             step="10" 
@@ -91,7 +91,11 @@
                                             class="range-slider__range"
                                         >
                                         <input 
-                                            value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                                            name="{{ filter.max_value.param_name }}"
+                                            {% if filter.max_value.value -%}
+                                                value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                                            {%- endif %}
+                                            placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
                                             min="0" 
                                             max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" 
                                             step="10" 
@@ -103,7 +107,7 @@
                         {% endcase %}
                     {% endunless %}
                 {% endfor %}
-                <button></button>
+                <button type="submit" class="filter__apply-btn btn btn_dark">Show {{ filter.values.size }} items</button>
             </form>
         </div>
         <div class="col-9">
