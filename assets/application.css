@@ -1481,10 +1481,15 @@ html {
   padding: 16px 0;
 }
 .filter__apply-btn {
+  display: none;
   position: absolute;
   left: 96%;
   z-index: 999;
   white-space: nowrap;
+  transform: translateY(-50%);
+}
+.filter__apply-btn_show {
+  display: block;
 }
 
 .filter-list {

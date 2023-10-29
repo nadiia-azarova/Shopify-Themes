@@ -24,12 +24,17 @@
     <footer class="page__footer footer">
       {% section 'footer' %}
     </footer>
-    {% if template == 'collection' %}
-      {{ 'range-slider.js' | asset_url | script_tag }}
-    {% endif %}
-    {% if template == 'product' or template == 'cart' %}
-      {{ 'qty-btn.js' | asset_url | script_tag }}
-    {% endif %}
+    
+    {% case template %}
+      {% when 'collection' %}
+        {{ 'range-slider.js' | asset_url | script_tag }}
+        {{ 'apply-filter-btn.js' | asset_url | script_tag }}
+      {% when 'product' or 'cart' %}
+        {{ 'qty-btn.js' | asset_url | script_tag }}
+      {% else %}
+        
+    {% endcase %}
+
     {{ 'application.js' | asset_url | script_tag }}
   </body>
 </html>

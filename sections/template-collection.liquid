@@ -10,6 +10,7 @@
                 <a href="{{ collection.url }}?sort_by={{ collection.sort_by }}">Clear All</a>
             </div>
             <form class="filter">
+                <button type="submit" id="applyBtn" class="filter__apply-btn btn btn_dark">Apply Filters</button>
                 {% for filter in collection.filters %}
                     {% unless filter.param_name == 'filter.v.availability' %}
                         {% case filter.type %}
@@ -26,6 +27,9 @@
                                                 id="filter_{{ filter.param_name }}_{{ forloop.index }}" 
                                                 class="filter-list__checkbox" 
                                                 tabindex="-1"
+                                                {% if filter_value.active %}
+                                                    checked
+                                                {% endif %}
                                             >
                                             <label 
                                                 for="filter_{{ filter.param_name }}_{{ forloop.index }}" 
@@ -45,32 +49,35 @@
                                 </div>
                             {% when 'boolean' %}
                                 <div class="filter__block">
-                                    <h4 class="heading heading_d"></h4>
                                     <ul class="filter-list">
                                         <li class="filter-list__item">
                                             <input 
                                                 type="checkbox" 
-                                                name="mono" 
-                                                value="{{ filter_value.value }}"
-                                                id="mono" 
+                                                name="{{ filter.param_name }}" 
+                                                value="{{ filter.true_value.value }}"
+                                                id="filter_{{ filter.param_name }}_{{ forloop.index }}" 
                                                 class="filter-list__checkbox" 
                                                 tabindex="-1"
+                                                {% if filter.active_values.size > 0 %}
+                                                    checked
+                                                {% endif %}
                                             >
-                                            <label for="mono" class="filter-list__label">
+                                            <label for="filter_{{ filter.param_name }}_{{ forloop.index }}" class="filter-list__label">
                                                 {% if filter_value.active %}
                                                     {% render 'icon-checkbox-checked' %}
                                                 {% else %}
                                                     {% render 'icon-checkbox-unchecked' %}
                                                 {% endif %}
-                                                <h4 class="filter-list__txt heading heading_d">{{ filter_value.label }}</h4>
-                                                <div class="filter-list__counter">{{ filter_value.count }}</div>
+                                                <h4 class="filter-list__txt heading heading_d">{{ filter.label }}</h4>
+                                                <span></span>
+                                                <div class="filter-list__counter">{{ filter.true_value.count }}</div>
                                             </label>
                                         </li>
                                     </ul>
                                 </div>
                             {% when 'price_range' %}
                                 <div class="filter__block">
-                                    <h4 class="filter__heading heading heading_d">{{ filter_value.label }}</h4>
+                                    <h4 class="filter__heading heading heading_d">{{ filter.label }}</h4>
                                     <div class="range-slider">
                                         <div class="range-slider__values-wrap">
                                             <span class="range-slider__txt">{{ cart.currency.symbol }}</span>
@@ -80,34 +87,39 @@
                                         </div>
                                         <input
                                             name="{{ filter.min_value.param_name }}"
-                                            {% if filter.min_value.value -%}
+
+                                            {% if filter.min_value.value %}
                                                 value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
-                                            {%- endif %}
-                                            placeholder="0"
+                                            {% else %}
+                                                value="0"
+                                            {% endif %}
+                                            
                                             min="0" 
                                             max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" 
                                             step="10" 
                                             type="range"
-                                            class="range-slider__range"
+                                            class="range-slider__range range-slider__range_min"
                                         >
                                         <input 
                                             name="{{ filter.max_value.param_name }}"
+
                                             {% if filter.max_value.value -%}
                                                 value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+                                            {% else %}
+                                            value="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
                                             {%- endif %}
-                                            placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+
                                             min="0" 
                                             max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" 
                                             step="10" 
                                             type="range"
-                                            class="range-slider__range"
+                                            class="range-slider__range range-slider__range_max"
                                         >
                                     </div>
                                 </div>
                         {% endcase %}
                     {% endunless %}
                 {% endfor %}
-                <button type="submit" class="filter__apply-btn btn btn_dark">Show {{ filter.values.size }} items</button>
             </form>
         </div>
         <div class="col-9">
