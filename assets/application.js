@@ -16,3 +16,10 @@ let yearDate = new Date().getFullYear();
 const yearInCopyright = document.querySelector('#year');
 
 yearInCopyright.innerText = yearDate;
+
+// Scroll to Top
+const toTopBtn = document.querySelector('#toTopBtn');
+
+toTopBtn.addEventListener('click', function () {
+    window.scrollTo(0, 0);
+});
