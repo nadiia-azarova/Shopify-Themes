@@ -1,5 +1,5 @@
 {% assign bouquetSize = product.metafields.custom.size.value %}
-{% assign currentSize = 'M' %}
+{% assign current_var = product.selected_or_first_available_variant %}
 <li class="products__item">
     <div class="products__btns">
         {% render 'icon-heart' %}
@@ -28,17 +28,37 @@
         <h3 class="info__heading heading heading_c">
             <a href="{{ product.url }}" class="heading__link">{{ product.title }}</a>
         </h3>
-        <div class="info__size">{{ product.metafields.custom.size.value }}()</div>
+        <div class="info__size">
+            {{ bouquetSize }}
+            {% assign bouquetSizeValue = bouquetSize |  remove: 'cm' | strip | times: 1 %}
+                {% if bouquetSizeValue < 50 %}
+                    (S)
+                {% elsif bouquetSizeValue >= 50 and bouquetSizeValue < 65 %}
+                    (M)
+                {% elsif bouquetSizeValue >= 65 %}
+                    (L)
+                {% endif %}
+        </div>
         <div class="info__price card-price">
             <div class="card-price__reg-price">{{ product.price | money }}</div>
             {% if product.compare_at_price %}
                 <div class="card-price__old-price">{{ product.compare_at_price | money }}</div>
             {% endif %}
         </div>
-        <div class="info__btn btn btn_dark">
-            <a href="" class="btn__link">
-                {% render 'icon-cart' %}
-            </a>
+        <div class="info__btn">
+            {% form 'product', product %}
+                <input type="hidden" name="id" value="{{ current_var.id }}">
+                <button 
+                    class="btn btn_dark" 
+                    type="submit" 
+                    name="add"
+                    {% unless current_var.available %}
+                        disabled
+                    {% endunless %}
+                >
+                    {% render 'icon-cart' %}
+                </button>
+            {% endform %}
         </div>
     </div>
 </li>

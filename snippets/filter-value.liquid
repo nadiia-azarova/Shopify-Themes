@@ -1,0 +1,41 @@
+<li class="filter-list__item">
+    <input 
+        type="checkbox" 
+        name="{{ filter.param_name }}"
+        value="{{ filter_value.value }}"
+        id="filter_{{ filter.param_name }}_{{ forloop }}" 
+        class="filter-list__checkbox" 
+        tabindex="-1"
+        {% if filter_value.active %}
+            checked
+        {% endif %}
+    >
+    <label 
+        for="filter_{{ filter.param_name }}_{{ forloop }}" 
+        class="filter-list__label"
+    >
+        <span class="filter-list__icon"></span>
+        {% case filter_value.value %}
+            {% when 'White' %}
+                <span class="filter-list__color filter-list__color_white"></span>
+            {% when 'Pink' %}
+                <span class="filter-list__color filter-list__color_pink"></span>
+            {% when 'Red' %}
+                <span class="filter-list__color filter-list__color_red"></span>
+            {% when 'Orange' %}
+                <span class="filter-list__color filter-list__color_orange"></span>
+            {% when 'Yellow' %}
+                <span class="filter-list__color filter-list__color_yellow"></span>
+            {% when 'Green' %}
+                <span class="filter-list__color filter-list__color_green"></span>
+            {% when 'Blue' %}
+                <span class="filter-list__color filter-list__color_blue"></span>
+            {% when 'Violet' %}
+                <span class="filter-list__color filter-list__color_violet"></span>
+            {% else %}
+            <span class="filter-list__color filter-list__color_"></span>
+        {% endcase %}
+        <span class="filter-list__txt">{{ filter_value.label }}</span>
+        <span class="filter-list__counter">{{ filter_value.count }}</span> 
+    </label>
+</li>

@@ -3,47 +3,45 @@ const filterLabel = document.querySelectorAll('.filter-list__label');
 const rangeSliders = document.querySelectorAll('.range-slider__range');
 const filtersCheckbox = document.querySelectorAll('.filter-list__checkbox');
 
-filterLabel.forEach((label) => {
-    label.addEventListener('click', applyFilterBtn);
+filtersCheckbox.forEach((box) => {
+    box.addEventListener('change', applyFilterBtn);
 });
 
-// rangeSliders.forEach((label) => {
-//     label.addEventListener('click', showApplyFilterBtn);
-// });
+rangeSliders.forEach((slider) => {
+    slider.addEventListener('click', applyFilterBtn);
+});
 
 function applyFilterBtn() {
-    changeTopValue(this);
+    if (window.matchMedia('(min-width: 577px)').matches) {
+        changeTopValue(this);
 
-    console.log('AAAAA');
-    console.log(isSelected());
+        if (
+            applyBtn.classList.contains('filter__apply-btn_show') &&
+            !isSelected()
+        ) {
+            applyBtn.classList.remove('filter__apply-btn_show');
+            return;
+        }
 
-    // if (applyBtn.classList.contains('filter__apply-btn_show') && !isSelected) {
-    //     console.log('AAAAA');
-    //     applyBtn.classList.remove('filter__apply-btn_show');
-    //     return;
-    // }
-
-    applyBtn.classList.add('filter__apply-btn_show');
+        applyBtn.classList.add('filter__apply-btn_show');
+    }
 }
 
 function changeTopValue(elem) {
     let thisY = elem.offsetTop;
-    let thisHalfHeight = elem.offsetHeight / 2;
-    applyBtn.style.top = thisY + thisHalfHeight + 'px';
+    applyBtn.style.top = thisY + 10 + 'px';
 }
 
 function checkAttribute(elem) {
-    return elem.hasAttribute('checked');
+    return elem.checked;
 }
 
-let isSelected = () => {
+function isSelected() {
     let filtersArray = [];
 
     filtersCheckbox.forEach((checkbox) => {
         filtersArray.push(checkbox);
     });
 
-    console.log(filtersArray.some(checkAttribute));
-
     return filtersArray.some(checkAttribute);
-};
+}
