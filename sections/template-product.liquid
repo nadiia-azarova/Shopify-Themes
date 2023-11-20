@@ -1,5 +1,6 @@
 {% assign current_var = product.selected_or_first_available_variant %}
 {% assign featured_img = current_var.featured_image |  default: product.featured_image %}
+{% assign bouquetSize = product.metafields.custom.size.value %}
 <div class="container">
     <div class="row">
         <div class="col-6 col-xs-12">
@@ -44,8 +45,7 @@
             </ul>
         </div>
 
-
-        <div class="col-6 col-xs-12 prod-txt">
+        <div class="col-6 col-xs-12">
             {% form 'product', product %}
                 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                 <div class="rating"></div>
@@ -94,67 +94,77 @@
                         {% endif %}
                     </button>
                 </div>
-                <div class="list-btns">
-                    <div class="list-btns__wish">
-                        <a href="#" class="list-btns__link link-btn" title="Add to wish list">
-                            {% render 'icon-heart' %}
-                            Add to Wishlist
-                        </a>
-                    </div>
-                    <div class="list-btns__compare">
-                        <a href="#" class="list-btns__link link-btn" title="Add to comparison">
-                            {% render 'icon-scales' %}
-                            Add to Comparison
-                        </a>
-                    </div>
+            {% endform %}
+            <div class="list-btns">
+                <div class="list-btns__wish">
+                    <a href="#" class="list-btns__link link-btn" title="Add to wish list">
+                        {% render 'icon-heart' %}
+                        Add to Wishlist
+                    </a>
                 </div>
-                <div class="prod-txt__item prod-txt__item_desc desc">
+                <div class="list-btns__compare">
+                    <a href="#" class="list-btns__link link-btn" title="Add to comparison">
+                        {% render 'icon-scales' %}
+                        Add to Comparison
+                    </a>
+                </div>
+            </div>
+            <div class="desc">
+                <div class="desc__item">
                     {{ product.description }}
                 </div>
-                <div class="prod-info">
-                    <div class="prod-info__block info-block">
-                        {% render 'icon-phone' %}
-                        <span class="heading heading_c">Contact our manager:</span>
-                        <a href="#" class="link-btn">+380 98 765 43 21</a>
-                    </div>
-                    <div class="prod-info__block info-block">
-                        <h3 class="info-block__heading heading heading_c">{% render 'icon-car' %}Courier delivery around Kyiv</h3>
-                        <p class="info-block__txt">Orders are accepted everyday from 9 a.m. to 9 p.m. Orders taken after 9. a.m. are delivered the next day. You can order delivery at the exact time. </p>
-                        <hr class="info-block__hr">
-                        <h3 class="info-block__heading heading heading_c">{% render 'icon-shop' %}Pick up</h3>
-                        <p class="info-block__txt">You can pick up your order from our nearest store. <a href="#" class="link-btn">See addresses</a></p>
-                    </div>
-                    <div class="info__block info-block">
-                        <h3 class="info-block__heading heading heading_c">Payment options</h3>
-                        <p class="info-block__txt">Cash on delivery</p>
-                        <ul class="info-block__payment-methods payment-methods">
-                            <li class="payment-methods__item payment-methods__item_visa">
-                                {% render 'icon-visa' %}
-                            </li>
-                            <li class="payment-methods__item">
-                                {% render 'icon-mastercard' %}
-                            </li>
-                            <li class="payment-methods__item">
-                                {% render 'icon-paypal' %}
-                            </li>
-
-                        </ul>
-                    </div>
+                <div class="desc__item">
+                    Size: {{ bouquetSize }} {% render 'product-size', bouquetSize: bouquetSize %}
                 </div>
-            {% endform %}
+            </div>
+            <div class="prod-info">
+                <div class="prod-info__block info-block">
+                    {% render 'icon-phone' %}
+                    <span class="heading heading_c">Contact our manager:</span>
+                    <a href="#" class="link-btn">+380 98 765 43 21</a>
+                </div>
+                <div class="prod-info__block info-block">
+                    <h3 class="info-block__heading heading heading_c">{% render 'icon-car' %}Courier delivery around Kyiv</h3>
+                    <p class="info-block__txt">Orders are accepted everyday from 9 a.m. to 9 p.m. Orders taken after 9. a.m. are delivered the next day. You can order delivery at the exact time. </p>
+                    <hr class="info-block__hr">
+                    <h3 class="info-block__heading heading heading_c">{% render 'icon-shop' %}Pick up</h3>
+                    <p class="info-block__txt">You can pick up your order from our nearest store. <a href="#" class="link-btn">See addresses</a></p>
+                </div>
+                <div class="info__block info-block">
+                    <h3 class="info-block__heading heading heading_c">Payment options</h3>
+                    <p class="info-block__txt">Cash on delivery</p>
+                    <ul class="info-block__payment-methods payment-methods">
+                        <li class="payment-methods__item payment-methods__item_visa">
+                            {% render 'icon-visa' %}
+                        </li>
+                        <li class="payment-methods__item">
+                            {% render 'icon-mastercard' %}
+                        </li>
+                        <li class="payment-methods__item">
+                            {% render 'icon-paypal' %}
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
+    {% assign gifts = collections.gifts %}
+    {% if gifts %}
+        <div class="row">
         <div class="col-12">
             <section class="section">
                 <h2 class="section__heading heading heading_b heading_center">Friquently bought together</h2>
                 <ul class="prod-section__item products">
-                    {% render 'product-card' %}
-                    {% render 'product-card' %}
-                    {% render 'product-card' %}
-                    {% render 'product-card' %}
+                    {% for product in gifts.products %}
+                        {% render 'product-card', product: product %} 
+                    {% endfor %}
                 </ul>
+                <div class="btn btn_dark">
+                   <a href="{{ gifts.url }}">To Category</a> 
+                </div>
             </section>
         </div>
     </div>
+    {% endif %}
 </div>

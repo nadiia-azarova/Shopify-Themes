@@ -30,14 +30,7 @@
         </h3>
         <div class="info__size">
             {{ bouquetSize }}
-            {% assign bouquetSizeValue = bouquetSize |  remove: 'cm' | strip | times: 1 %}
-                {% if bouquetSizeValue < 50 %}
-                    (S)
-                {% elsif bouquetSizeValue >= 50 and bouquetSizeValue < 65 %}
-                    (M)
-                {% elsif bouquetSizeValue >= 65 %}
-                    (L)
-                {% endif %}
+            {% render 'product-size', bouquetSize: bouquetSize %}
         </div>
         <div class="info__price card-price">
             <div class="card-price__reg-price">{{ product.price | money }}</div>

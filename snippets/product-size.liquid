@@ -1,0 +1,9 @@
+{% assign bouquetSizeValue = bouquetSize |  remove: 'cm' | strip | times: 1 %}
+
+{% if bouquetSizeValue < 50 %}
+    (S)
+{% elsif bouquetSizeValue >= 50 and bouquetSizeValue < 65 %}
+    (M)
+{% elsif bouquetSizeValue >= 65 %}
+    (L)
+{% endif %}

@@ -2014,8 +2014,11 @@ html {
 }
 
 .desc {
+  padding-bottom: 16px;
+}
+.desc__item {
   box-sizing: border-box;
-  padding: 12px 0;
+  padding: 8px 0;
 }
 
 .prod-info__block:not(:last-child) {
