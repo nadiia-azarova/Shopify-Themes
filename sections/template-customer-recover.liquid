@@ -1,0 +1,57 @@
+<section id="loginForm" class="form">
+    <h1 class="heading heading_a heading_center">Reset Your Password</h1>
+
+    {% form 'customer_login' %}
+        {% if form.errors %}
+            <div class="form__elem form-error" role="alert">{{ form.errors |  default_errors }}</div>
+        {% endif %}
+
+        <div class="form__elem">
+            <label for="newPW" class="form__label form-label">New Password</label>
+            <div class="input-wrap">
+                <div class="input-wrap__icon">
+                    {% render 'icon-lock' %}
+                </div>
+                <input 
+                    type="password" 
+                    name="customer[password]" 
+                    id="newPW"
+                    autocomplete="new-password"
+                    class="input-wrap__input form-input"
+                    placeholder="New Password"
+                    required
+                >
+            </div>
+        </div>
+
+        <div class="form__elem">
+            <label for="confirmPW" class="form__label form-label">Confirm Your Password</label>
+            <div class="input-wrap">
+                <div class="input-wrap__icon">
+                    {% render 'icon-lock' %}
+                </div>
+                <input 
+                    type="password" 
+                    name="customer[password_confirmation]" 
+                    id="confirmPW"
+                    autocomplete="new-password"
+                    class="input-wrap__input form-input"
+                    placeholder="Confirm Password"
+                    required
+                >
+            </div>
+        </div>
+
+        <div class="form__center">
+            <button type="submit" class="btn btn_dark">Reset Password</button>
+        </div>
+        
+    {% endform %}
+</section>
+
+{% schema %}
+    {
+        "name": "reset-password",
+        "class": "section-white"
+    }
+    {% endschema %}

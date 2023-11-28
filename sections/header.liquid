@@ -55,12 +55,21 @@
             </a>
           </div>
           {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <div class="menu-icon menu-icon_user">
+                <a href="{{ routes.account_url }}" class="menu-icon__link">
+                  {% render 'icon-user' %}
+                  <span class="menu-icon__txt">{{ customer.name }}</span>
+                </a>
+              </div>
+            {% else %}
             <div class="menu-icon menu-icon_user">
-              <a href="#" class="menu-icon__link">
+              <a href="{{ routes.account_login_url }}" class="menu-icon__link">
                 {% render 'icon-user' %}
-                <span class="menu-icon__txt">Jane Doe</span>
+                <span class="menu-icon__txt">Login | Register</span>
               </a>
             </div>
+            {% endif %}
             <div class="menu-icon menu-icon_heart">
               <a href="#" class="menu-icon__link">
                 {% render 'icon-heart' %}

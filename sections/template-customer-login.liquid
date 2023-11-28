@@ -1,0 +1,107 @@
+<section id="loginForm" class="form">
+    <h1 class="heading heading_a heading_center">Login</h1>
+
+    {% form 'customer_login' %}
+        {% if form.errors %}
+            <div class="form__elem form-error" role="alert">{{ form.errors |  default_errors }}</div>
+        {% endif %}
+
+        <div class="form__elem">
+            <label for="customerEmail" class="form__label form-label">Email address</label>
+            <div class="input-wrap">
+                <div class="input-wrap__icon">
+                    {% render 'icon-envelope' %}
+                </div>
+                <input 
+                    type="email" 
+                    name="customer[email]" 
+                    id="customerEmail"
+                    autocomplete="email"
+                    class="input-wrap__input form-input"
+                    placeholder="Email address"
+                >
+            </div>
+        </div>
+
+        {% if form.password_needed %}
+            <div class="form__elem">
+                <label for="customerPW" class="form-label">Email address</label>
+                <div class="input-wrap">
+                    <div class="input-wrap__icon">
+                        {% render 'icon-lock' %}
+                    </div>
+                    <input 
+                        type="password" 
+                        name="customer[password]" 
+                        id="customerPW"
+                        autocomplete="current-password"
+                        class="input-wrap__input form-input"
+                        placeholder="Password"
+                    >
+                </div>
+                <a 
+                    href="#" 
+                    id="forgotPWBtn"
+                    class="input-wrap__link form-link link-btn"
+                >
+                    Forgot your password?
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="form__center">
+            <button type="submit" class="btn btn_dark">Login Now</button>
+        </div>
+
+        {% render 'sign-up-link' %}
+        
+    {% endform %}
+</section>
+
+<section id="recoverPWForm" class="form form_hidden">
+    <h1 class="heading heading_a heading_center">Password Recower</h1>
+
+    {% form 'recover_customer_password' %}
+        {% if form.errors %}
+            <div class="form__elem form-error" role="alert">{{ form.errors |  default_errors }}</div>
+        {% endif %}
+
+        <div class="form__elem">
+            <label for="emailRecover" class="form__label form-label">Password</label>
+            <div class="input-wrap">
+                <div class="input-wrap__icon">
+                    {% render 'icon-envelope' %}
+                </div>
+                <input 
+                    type="email" 
+                    name="email" 
+                    id="emailRecover"
+                    autocomplete="email"
+                    class="input-wrap__input form-input"
+                    placeholder="Email address"
+                >
+            </div>
+            <a 
+                href="{{ routes.account_login_url }}" 
+                id="backToLogin"
+                class="input-wrap__link form-link link-btn"
+            >
+                Back to Login
+            </a>
+        </div>
+
+        <div class="form__center">
+            <button type="submit" class="btn btn_dark">Recover Password</button>
+        </div>
+
+        {% render 'sign-up-link' %}
+        
+    {% endform %}
+</section>
+
+{% schema %}
+{
+    "name": "login",
+    "class": "section-white"
+}
+{% endschema %}

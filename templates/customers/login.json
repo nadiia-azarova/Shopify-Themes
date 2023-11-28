@@ -1,0 +1,9 @@
+{
+    "layout": "fullscreen",
+    "sections": {
+        "template": {
+            "type": "template-customer-login"
+        }
+    },
+    "order": ["template"]
+}

@@ -1,0 +1,22 @@
+<a 
+    href="{{ shop.url }}" 
+    id="backLink"
+    class="back-link"
+>
+    <span class="back-link__img">{% render 'icon-arrow-lt' %}</span>
+    <span class="back-link__txt">{{ section.settings.linkText }}</span>
+</a>
+
+{% schema %}
+{
+    "name": "Back Link",
+    "settings": [
+        {
+            "type": "text",
+            "id": "linkText",
+            "label": "Link Text",
+            "default": "Return to Store"
+        }
+    ]
+}
+{% endschema %}

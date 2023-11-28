@@ -1,0 +1,11 @@
+{
+    "layout": "fullscreen",
+    "sections": {
+        "template": {
+            "type": "template-customer-account"
+        }
+    },
+    "order": [
+        "template"
+    ]
+}

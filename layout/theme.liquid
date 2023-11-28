@@ -34,6 +34,8 @@
       {% when 'product' or 'cart' %}
         {{ 'qty-btn.js' | asset_url | script_tag }}
         {{ 'modal.js' | asset_url | script_tag }}
+      {% when 'login' %}
+        {{ 'login .js' | asset_url | script_tag }}
       {% else %}
         
     {% endcase %}

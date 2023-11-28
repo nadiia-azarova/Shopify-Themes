@@ -1,0 +1,76 @@
+<section class="form">
+    <h1 class="heading heading_a heading_center">Sign Up</h1>
+    {% form 'create_customer' %}
+
+        {% if form.errors %}
+            <div class="form__elem form-error" role="alert">{{ form.errors |  default_errors }}</div>
+        {% endif %}
+        
+        <div class="form__elem">
+            <label for="firstName" class="form__label form-label">First Name*</label>
+            <input 
+                type="text" 
+                name="customer[first_name]" 
+                id="firstName"
+                autocomplete="given-name"
+                class="input-wrap__input form-input"
+                placeholder="First Name"
+                required
+            >
+        </div>
+
+        <div class="form__elem">
+            <label for="lastName" class="form__label form-label">Last Name*</label>
+            <input 
+                type="text" 
+                name="customer[last_name]" 
+                id="lastName"
+                autocomplete="family-name"
+                class="input-wrap__input form-input"
+                placeholder="Last Name"
+                required
+            >
+        </div>
+
+        <div class="form__elem">
+            <label for="customerEmail" class="form__label form-label">Email address*</label>
+            <input 
+                type="email" 
+                name="customer[email]" 
+                id="customerEmail"
+                autocomplete="email"
+                class="input-wrap__input form-input"
+                placeholder="Email address"
+                required
+            >
+        </div>
+
+        <div class="form__elem">
+            <label for="customerPassword" class="form__label form-label">Password*</label>
+            <input 
+                type="password" 
+                name="customer[password]" 
+                id="customerPassword"
+                autocomplete="new-password"
+                class="input-wrap__input form-input"
+                placeholder="Password"
+                required
+            >
+        </div>
+
+        <div class="form__center">
+            <button type="submit" class="btn btn_dark">Register Now</button>
+        </div>
+
+        {% render 'sign-up-link' %}
+
+    {% endform %}
+</section>
+
+{% schema %}
+    {
+        "name": "register",
+        "class": "section-white"
+    }
+{% endschema %}
+    

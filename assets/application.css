@@ -698,6 +698,11 @@ html {
   margin-top: 48px;
 }
 
+.logo svg {
+  width: 164px;
+  height: 59px;
+}
+
 .social {
   display: flex;
   flex-wrap: wrap;
@@ -1205,6 +1210,129 @@ html {
 }
 .footer-menu__link:hover {
   color: #db1b53;
+}
+
+.page-full {
+  background-color: #f4f0ef;
+}
+.page-full__header, .page-full__footer {
+  padding: 16px 0;
+}
+
+.center-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.section-white {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 0 8px rgba(172, 142, 134, 0.5);
+}
+
+.back-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 300ms ease-in-out 0ms;
+  color: #ac8e86;
+}
+.back-link:hover {
+  color: #db1b53;
+}
+.back-link__img svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+.form_hidden {
+  display: none;
+}
+.form__elem {
+  margin: 16px 0;
+}
+.form__center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 16px auto;
+  text-align: center;
+}
+
+.input-wrap {
+  position: relative;
+}
+.input-wrap__icon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  color: #ac8e86;
+  border-right: 1px solid currentColor;
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+}
+.input-wrap__icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+.input-wrap__icon + .input-wrap__input {
+  padding-left: 40px;
+}
+.input-wrap__link {
+  line-height: 24px;
+}
+
+.form-link {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+}
+
+.form-error {
+  box-sizing: border-box;
+  padding: 8px 16px;
+  background-color: rgba(204, 0, 0, 0.25);
+  border-radius: 8px;
+  color: #9A0000;
+  font-size: 14px;
+  text-align: center;
+}
+
+.form-label {
+  display: block;
+  box-sizing: border-box;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form-input {
+  all: unset;
+  outline: revert;
+  display: block;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ac8e86;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 4px 8px;
+}
+.form-input::placeholder {
+  color: #ac8e86;
+  opacity: 1;
 }
 
 .hero-section {
@@ -2062,6 +2190,29 @@ html {
 }
 .payment-methods__item_visa svg {
   width: 37px;
+}
+
+.rating {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.stars {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  top: -1px;
+}
+.stars svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  fill: #db1b53;
 }
 
 .cart-list {

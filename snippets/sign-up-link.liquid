@@ -1,0 +1,10 @@
+<div class="form__elem form-link">
+    {% case template %}
+        {% when 'customers/login' or 'customers/reset-password' %}
+            Don't have an account?<a href="{{ routes.account_register_url }}" id="signUpBtn" class="link-btn"> Sign Up</a>
+        {% when 'customers/register' %}
+            <a href="{{ routes.account_login_url }}" id="signUpBtn" class="link-btn">Back to Login</a>
+        {% else %}
+    {% endcase %}
+</div>
+
