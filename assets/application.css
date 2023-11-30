@@ -1472,6 +1472,10 @@ html {
 .products__btns svg:hover {
   fill: #db1b53;
 }
+.products__btn {
+  all: unset;
+  outline: revert;
+}
 .products__offer {
   position: absolute;
   left: 0;

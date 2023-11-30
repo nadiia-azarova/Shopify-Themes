@@ -71,14 +71,14 @@
             </div>
             {% endif %}
             <div class="menu-icon menu-icon_heart">
-              <a href="#" class="menu-icon__link">
+              <a href="/pages/whishlist" class="menu-icon__link">
                 {% render 'icon-heart' %}
                 <span class="menu-icon__counter">0</span>
               </a>
             </div>
           {% endif %}
           <div class="menu-icon menu-icon_scales">
-            <a href="#" class="menu-icon__link">
+            <a href="/pages/comparison" class="menu-icon__link">
               {% render 'icon-scales' %}
               <span class="menu-icon__counter">0</span>
             </a>
@@ -122,15 +122,17 @@
           <span class="menu-icon__txt">Jane Doe</span>
         </a>
       </div>
-      <div class="menu-icon">
-        <a href="#" class="menu-icon__link">
+      {% if customer %}
+        <div class="menu-icon">
+        <a href="/pages/wishlist" class="menu-icon__link">
           {% render 'icon-heart' %}
           <span class="menu-icon__counter">0</span>
         </a>
       </div>
+      {% endif %}
     {% endif %}
     <div class="menu-icon">
-      <a href="#" class="menu-icon__link">
+      <a href="/pages/comparison" class="menu-icon__link">
         {% render 'icon-scales' %}
         <span class="menu-icon__counter">0</span>
       </a>

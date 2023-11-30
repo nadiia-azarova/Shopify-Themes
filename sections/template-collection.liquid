@@ -118,31 +118,58 @@
                                     </div>
                             {% endcase %}
                         {% endunless %}
-                        {% if filter.param_name == 'filter.p.m.custom.color' %}
-                            {% assign filters = collection.filters | where: 'param_name', 'filter.p.m.custom.color' %}
-                            {% assign whiteColor = filters.first.values | where: 'value', 'White' %}
-                            {% assign pinkColor = filters.first.values | where: 'value', 'Pink' %}
-                            {% assign redColor = filters.first.values | where: 'value', 'Red' %}
-                            {% assign orangeColor = filters.first.values | where: 'value', 'Orange' %}
-                            {% assign yellowColor = filters.first.values | where: 'value', 'Yellow' %}
-                            {% assign greenColor = filters.first.values | where: 'value', 'Green' %}
-                            {% assign blueColor = filters.first.values | where: 'value', 'Blue' %}
-                            {% assign violetColor = filters.first.values | where: 'value', 'Violet' %}
 
+                        {% if filter.param_name == 'filter.p.m.custom.color' %}
                             <div class="filter__block">
                                 <h4 class="heading heading_d">{{ filter.label }}</h4>
                                 <ul class="filter-list">
-                                    {% render 'filter-value', filter_value: whiteColor.first, filter: filter, forloop: 1 %}
-                                    {% render 'filter-value', filter_value: pinkColor.first, filter: filter, forloop: 2 %}
-                                    {% render 'filter-value', filter_value: redColor.first, filter: filter, forloop: 3 %}
-                                    {% render 'filter-value', filter_value: orangeColor.first, filter: filter, forloop: 4 %}
-                                    {% render 'filter-value', filter_value: yellowColor.first, filter: filter, forloop: 5 %}
-                                    {% render 'filter-value', filter_value: greenColor.first, filter: filter, forloop: 6 %}
-                                    {% render 'filter-value', filter_value: blueColor.first, filter: filter, forloop: 7 %}
-                                    {% render 'filter-value', filter_value: violetColor.first, filter: filter, forloop: 8 %}
+                                    {% for filter_value in filter.values %}
+                                        <li class="filter-list__item">
+                                            <input 
+                                                type="checkbox" 
+                                                name="{{ filter.param_name }}"
+                                                value="{{ filter_value.value }}"
+                                                id="filter_{{ filter.param_name }}_{{ forloop }}" 
+                                                class="filter-list__checkbox" 
+                                                tabindex="-1"
+                                                {% if filter_value.active %}
+                                                    checked
+                                                {% endif %}
+                                            >
+                                            <label 
+                                                for="filter_{{ filter.param_name }}_{{ forloop }}" 
+                                                class="filter-list__label"
+                                            >
+                                                <span class="filter-list__icon"></span>
+                                                {% case filter_value.value %}
+                                                    {% when 'White' %}
+                                                        <span class="filter-list__color filter-list__color_white"></span>
+                                                    {% when 'Pink' %}
+                                                        <span class="filter-list__color filter-list__color_pink"></span>
+                                                    {% when 'Red' %}
+                                                        <span class="filter-list__color filter-list__color_red"></span>
+                                                    {% when 'Orange' %}
+                                                        <span class="filter-list__color filter-list__color_orange"></span>
+                                                    {% when 'Yellow' %}
+                                                        <span class="filter-list__color filter-list__color_yellow"></span>
+                                                    {% when 'Green' %}
+                                                        <span class="filter-list__color filter-list__color_green"></span>
+                                                    {% when 'Blue' %}
+                                                        <span class="filter-list__color filter-list__color_blue"></span>
+                                                    {% when 'Violet' %}
+                                                        <span class="filter-list__color filter-list__color_violet"></span>
+                                                    {% else %}
+                                                    <span class="filter-list__color filter-list__color_"></span>
+                                                {% endcase %}
+                                                <span class="filter-list__txt">{{ filter_value.label }}</span>
+                                                <span class="filter-list__counter">{{ filter_value.count }}</span> 
+                                            </label>
+                                        </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         {% endif %}
+
                     {% endfor %}
                     <button type="submit" id="applyBtn" class="filter__apply-btn btn btn_dark">Apply Filters</button>
                 </form>
