@@ -1,6 +1,0 @@
-{% assign wishlist_product_ids = request.post_params.product_id | split: ',' %}
-{% for product_id in wishlist_product_ids %}
-  {% assign product = all_products[product_id] %}
-  <p>{{ product.title }}</p>
-  <!-- Add additional product information as needed -->
-{% endfor %}

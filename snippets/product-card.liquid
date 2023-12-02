@@ -3,18 +3,24 @@
 {% assign product_rating = product.metafields.custom.product_rating %}
 <li class="products__item">
     <div class="products__btns">
-        <form action="/pages/wishlist" method="post">
+        <form action="pages/wishlist" method="post">
             <input type="hidden" name="product_id" value="{{ product.id }}">
             <button type="submit" class="products__btn">
                 {% render 'icon-heart' %}
             </button>
         </form>
-        <form action="/pages/comparison" method="post">
+        {% form 'comparison', product %}
+            <input type="hidden" name="product_id" value="{{ current_var.id }}">
+            <button type="submit" class="products__btn">
+                {% render 'icon-scales' %}
+            </button>
+        {% endform %}
+        {% comment %} <form action="/pages/comparison" method="post">
             <input type="hidden" name="product_id" value="{{ product.id }}">
             <button type="submit" class="products__btn">
                 {% render 'icon-scales' %}
             </button>
-        </form>
+        </form> {% endcomment %}
     </div>
     <a href="{{ product.url }}" class="products__link">
         {% if product.featured_image %}

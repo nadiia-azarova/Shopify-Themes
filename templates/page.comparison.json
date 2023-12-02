@@ -1,7 +1,7 @@
 {
     "sections": {
         "template": {
-            "type": "template-whishlist"
+            "type": "template-comparison"
         }
     },
     "order": ["template"]
