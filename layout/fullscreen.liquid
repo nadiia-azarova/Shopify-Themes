@@ -30,7 +30,6 @@
     {% case template %}
       {% when 'cart' %}
         {{ 'qty-btn.js' | asset_url | script_tag }}
-        {{ 'modal.js' | asset_url | script_tag }}
       {% when 'customers/login' %}
         {{ 'login.js' | asset_url | script_tag }}
       {% else %}

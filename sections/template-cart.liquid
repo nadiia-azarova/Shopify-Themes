@@ -1,5 +1,5 @@
 {% if cart.item_count > 0 %}
-    <h1 class="heading heading_a">Your cart</h1>
+    <h1 class="heading heading_a heading_center">Your cart</h1>
     {% form 'cart', cart %}
         <ul class="cart-list">
         {% for item in cart.items %}
@@ -24,10 +24,10 @@
                 </a>
                 <div class="product-item__item">
                     <div class="product-item__qty qty">
-                        <button class="qty__btn qty__btn_minus">-</button>
+                        <button                         class="qty__btn  qty__btn_minus">-</button>
                         <input 
                             type="number" 
-                            name="quantity" 
+                            name="updates[]"
                             id="quantity-{{ section.id }}" value="{{ item.quantity }}" 
                             min="1" 
                             max="{{ current_var.inventory_quantity }}"
@@ -44,12 +44,22 @@
             </li>
         {% endfor %}
     </ul>
+    <div class="total-price">
+        <span class="total-price__txt">Subtotal: </span>
+        <span class="total-price__price">{{ cart.total_price |  money }}</span>
+    </div>
+    <button id="btnUpdate" type="submit" value="Update cart" class="btn-hidden">Update</button>
+    <button type="submit" name="checkout" value="Checkout"  class="btn btn_dark btn_rt">Checkout</button>
+
     {% endform %}
     
-    <div class="df">
-        <a href="{{ routes.all_products_collection_url }}" class="cl">Continue Shopping</a>
-    </div>
 {% else %}
-    <h1>Your cart is empty</h1>   
+    <h1 class="heading heading_a heading_center">Your cart is empty</h1>   
 {% endif %}
-<script src="/assets/cart.js"></script>
+
+{% schema %}
+{
+    "name": "cart",
+    "class": "section-white"
+}
+{% endschema %}

@@ -1,2 +1,9 @@
-
+{% assign wishlist_product_ids = request.request_url.params.product_id | split: ',' %}
+{% for product_id in wishlist_product_ids %}
+  {% assign product = all_products[product_id] %}
+  <p>{{ product.title }}</p>
+  <!-- Add additional product information as needed -->
+{% endfor %}
+{{ request.request_url.params.product_id }}
+<br>
 <p>Lorem Ipsum</p>

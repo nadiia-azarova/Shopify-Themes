@@ -1,25 +1,25 @@
-// Qty buttons
+const qtyBtns = document.querySelectorAll('.qty__btn');
 
-const qtyBtns = document.querySelectorAll('.qty__btn'),
-    qtyInput = document.querySelector('.qty__input');
-
-qtyBtns.forEach((btn) => {
-    btn.addEventListener('click', changeQty);
-});
+qtyBtns.forEach(btn => {
+    btn.addEventListener('click', changeQty, true);
+})
 
 function changeQty(e) {
     e.preventDefault();
 
-    if (
-        e.target === document.querySelector('.qty__btn_minus') &&
-        qtyInput.value > +qtyInput.min
-    ) {
-        console.log(qtyInput.value);
-        qtyInput.value = +qtyInput.value - 1;
-    } else if (
-        e.target === document.querySelector('.qty__btn_plus') &&
-        qtyInput.value <= +qtyInput.max
-    ) {
-        qtyInput.value = +qtyInput.value + 1;
+    const parentElem = this.parentElement;
+    const currentInput = parentElem.querySelector('input');
+
+    if (this.classList.contains('qty__btn_minus') && currentInput.value > 1) {
+        currentInput.value = +currentInput.value - 1;
+    } else if (this.classList.contains('qty__btn_plus')) {
+        currentInput.value = +currentInput.value + 1;
     }
+
+    updateCart();
+}
+
+function updateCart() {
+    const btnUpdate = document.querySelector('#btnUpdate');
+    btnUpdate.click();
 }

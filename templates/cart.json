@@ -1,4 +1,6 @@
 {
+    "layout": "fullscreen",
+    "wrapper": "section",
     "sections": {
         "template-cart": {
             "type": "template-cart"

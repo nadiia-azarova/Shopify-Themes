@@ -31,8 +31,7 @@
         {{ 'apply-filter-btn.js' | asset_url | script_tag }}
         {{ 'product-sort.js' |  asset_url |  script_tag }}
         {{ 'responsive-filter.js' |  asset_url |  script_tag }}
-      {% when 'product' or 'cart' %}
-        {{ 'qty-btn.js' | asset_url | script_tag }}
+      {% when 'product'%}
         {{ 'modal.js' | asset_url | script_tag }}
       {% when 'login' %}
         {{ 'login .js' | asset_url | script_tag }}
